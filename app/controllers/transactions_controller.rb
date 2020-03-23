@@ -21,14 +21,14 @@ class TransactionsController < ApplicationController
 
     def show
         #shows transaction by the id of he transaction
-        @transaction = Transaction.find_by(id: params[:id])
+        @transaction = Transaction.where(id: params[:id])
         render json: {transaction: @transaction, status: :ok}
     end
 
     def withdrawals
         #show a list of withdrawals
 
-        @withdrawals = Transaction.find_by(transaction_type: 'withdrawal')
+        @withdrawals = Transaction.where(transaction_type: 'withdrawal')
 
         render json: {withdrawals: @withdrawals, status: :ok, msg: "All your withdrawals!"}
     end
