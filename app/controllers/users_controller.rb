@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
-
-    # def index
-    #     render json: {status: :ok, user: @user, msg: "You're in!"}
-    # end
-
+   
     def create
-        @user = User.new(user_params)
+        @user = User.new(user_params) #create new user with params 
         
-           if @user.save
-            
-            #send email with api_key for new user
+           if @user.save #save it!
+
+                #send email with api_key for new user
                 send_token = UserMailer.welcome_with_api_token!(@user)
                 send_token.deliver
 
-             render json: {status: :ok, user: @user, msg: "Created, welcome!", api_key_sent_to: "#{user_params[:email]}"}
+                render json: {status: :ok, user: @user, msg: "Created, welcome!", api_key_sent_to: "#{user_params[:email]}", email: send_token}
            else
-            render json: {status: :bad_request, msg: "Try Again!" }
+                render json: {status: :bad_request, msg: "Try Again!" }
            end
-
+ 
     end
 
 

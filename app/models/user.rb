@@ -55,7 +55,7 @@ class User < ApplicationRecord
     end
     
     private
-
+ 
     def ensure_key
         #checks if api_key exists else one will be assigned!
         self.api_key ||= self.generate_key

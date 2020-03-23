@@ -1,7 +1,7 @@
 
 class CoinsController < ApplicationController
     
-    #before_action  :authentication! 
+    # before_action  :authentication!  #commented out for testing purposes 
 
     def index 
         @coins = Coin.all
@@ -11,7 +11,7 @@ class CoinsController < ApplicationController
     end
 
     def show
-        #shows a coin if it exists by it's id else let end know it's a bad request!
+        #shows a coin if it exists by it's id, else lets end know it's a bad request!
 
 
         @coin = Coin.find_by(id: params[:id])  
@@ -45,7 +45,7 @@ class CoinsController < ApplicationController
         @coin = Coin.find_by(id: params[:id]) 
 
         if @coin #checking to see if coin exists (is it nil?)
-            
+            @coin.destroy #DESTROY!
             #then render fun!
             render json: {coin: @coin, status: :ok, transaction: @transaction, msg: 'Coin removed from system!'}             
         end
@@ -53,7 +53,7 @@ class CoinsController < ApplicationController
 
     def update
         #updates the coin 
-            @coin = Coin.find_by(coin_params) #finds by coin_params 
+            @coin = Coin.find_by(id: params[:id]) #finds by coin_params 
 
             @coin.update(coin_params) #update 
 
@@ -63,7 +63,8 @@ class CoinsController < ApplicationController
 
     def available
         #shows available balance 
-        render json: {'Available in USD': "$#{Coin.total}", status: :ok, msg: 'Your available balance!'}
+        @coin = Coin.new
+        render json: {'Available in USD': "$#{@coin.total}", status: :ok, msg: 'Your available balance!'}
     end
 
    

@@ -12,7 +12,7 @@
 
 class Coin < ApplicationRecord
     validates :name, :value, presence: true
-
+   
     
     def total
          #grabbing count and value in subarrays
@@ -25,6 +25,8 @@ class Coin < ApplicationRecord
 
            return sum/100.00
     end
+
+   
 
     def minusCoin
         # subtract count by 1 

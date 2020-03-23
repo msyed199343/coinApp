@@ -1,6 +1,6 @@
 
 class ApplicationController < ActionController::API
-#  protect_from_forgery unless: -> { request.format.json? }
+
 
     def current_user
         return nil unless params[:api_key]
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     def sign_in(user)
         current_user = user
     end
-
+ 
     def authentication!
         unless has_key
             render json: {status: :unauthorized}

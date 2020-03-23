@@ -1,9 +1,11 @@
+Random notes and thoughts during my work
+
 Step 1 : coins
 
 
-* Create a Coins table with a value, name, and timestamps of some sort 
-    * Make sure null: false 
-* Create a model based for coins 
+Create a Coins table with a value, name, and timestamps of some sort 
+    Make sure null: false 
+Create a model based for coins 
     
     Coin possible model methods
         Coin:coin_sum
@@ -25,7 +27,7 @@ Step 1 : coins
              show a single coin by the id (coin.find(id))) USING #SHOW IN CONTROLLER (NOT NEEDED) 
         
 
-* Create CoinsConstroller
+Create CoinsConstroller
     #index
         return all coins 
             (@coins = Coin.all 
@@ -46,17 +48,17 @@ Step 1 : coins
             render ==> (show sum and to show total is decresed because of "withdrawl" of coin )
     
 STEP 2 : transactions
-* ! BEFORE ACTION CLAUSE !
-* create transactions table with 
+! BEFORE ACTION CLAUSE !
+create transactions table with 
    - coins_id (to see which type of coin)
    - timestamps (specificaly to see when transaction happned 
    - user_id  (connecting to the users api_key through this column)
 
-* Transaction model
+Transaction model
     -association/validations 
         - a transaction belongs to a specific user(api_key/user_id)
         -validate coin_id and user_id make sure not === null
-* Transactions controller
+Transactions controller
     - Get#index
         - get all transactions
     - Post#create
@@ -66,7 +68,7 @@ STEP 2 : transactions
     
 
 STEP 3 WITHDRAWLS
-   * -  NEED TO ADD A "TYPE" column TO TRANSACTIONs ABLE to distinguish    if  it's a withdrawl or deposit!
+   -  NEED TO ADD A "TYPE" column TO TRANSACTIONs ABLE to distinguish    if  it's a withdrawl or deposit!
    - fix transactions models to reflect above change
     -next need to add withdrawl capabilities through transactions contorller
     - Transactions controller

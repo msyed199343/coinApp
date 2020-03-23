@@ -1,51 +1,139 @@
-## MortgageHippo Coding Challenge: Coin Machine API
-------
-Welcome to the MortgageHippo Coding Challenge. For this challenge you will need to create a RESTful Rails API that will act as a Coin Machine, taking in Coins and performing a variety of functions. This README will be broken up into steps, please read through the entire README before beginning.
 
-__If you have any questions during the course of this challenge please feel free to email elliott@mortgagehippo.com!__
-
-### Setup & Technical Requirements
-Setup for this is simple, please create a new Rails App and configure it to act exclusively with JSON format for the endpoints. Use any gems or patterns you feel are necessary, but be ready to explain any and all decisions you make along the way.
-
-This project will not require Users or typical authentication, with devise or otherwise, instead please track Api Keys for the system and confirm validity of all api keys before a request is accepted.
-
-Please interpret all steps as "direction", not "law", if you'd like to change something to make the system work better please do. Once again, however, please be ready to justify such changes.
+Thank you for checking out my coinApi.  I will leave some notes below on how to access the routes and functionality of the api!  I have also implemented notes throughout the code if you would like to see shorter notes on what each method's purpose is.  Please be advised that some request requre the use postman, like POST and DELETE request!  Thanks and I appreciate you taking the time to check this out! :)
 
 ### Step 1: Coins
-Please create a resource called `Coin`. This should have two primary attributes: `Value` and `Name`. This resource will represent the accepted coins to be deposited into the system. Please allow any valid User to perform the following actions on `Coin`s:
-<!-- 
-check* Create a New Coin  
-check* Update Attributes on an existing Coin
-check* Delete a Coin from the System
-check* View all Coins
-check* View a single Coin
-check* Get the total Value of all Coins in the system at a given time -->
 
-### Step 2: Deposits
-Now that we have `Coin`s in our system we will need to track when `Coin`s are deposited. Create a new resource called `Transaction`, that will track whenever a deposit is made, one coin at a time. A `Transaction` resource should track the following information:
+In this part I was instructed to create a coin resourse.  I created migrations/models/controller for that resource.  
 
-check* When the `Transaction` took place
-check* The deposited `Coin`
-check* The Api User that performed the `Transaction`
+Coin database 
 
-Additionally, please enable the following endpoints for any valid User to perform for `Transaction`s:
+- For the coin database I used postgres and added the columns name, value, timestamps(updates/created at), and eventually added a count option.  Instead of scanning for just the one object coin I made it where, for example 
+     a penny object is worth 1 and has a name "penny" 
+     but instead of having a lot of those objects in the data base as users deposit/withdraw I just added a count for that certain users "coins"
+ 
+Coin model
 
-check* Get a list of all `Transaction`s
-check * Create a new `Transaction` & deposit a `Coin`
-check * Get a list of all `Transaction`s scoped to a specific Api User
+- For the coin model I added some validations.
+- I also added a few methods
+    methods
+        Coin#total
+            gives the total available balance by taking the values and 'count' of all coins and returning it in dollar format
+        Coin#minusCoin
+            subtracts 1 from a given coins count (since the machine can only take one coin in and out at a time)
+            saves to db!
+        Coin#refillCoin
+            Does the opposite.  Adds a coin by 1 instead.
+            again saves to db!
 
-### Step 3: Withdrawals
-Since there is money in the system Users will want to take some of it out. Please extend the created `Transaction` resource to include when a User takes coins out of the system, again, only one coin at a time. A User is not limited by the amount they can withdraw (don't worry about tracking balances), but they can't take out `Coin`s that aren't there. Please create/modify the following endpoints:
+Coins controller
 
-check* Decrement the amount of a specific `Coin` from the system. Also gracefully handle any errors associated with overdrawing a certain type of `Coin`
-check* Include all Withdrawals in any lists of all `Transaction`s
+- Coin#index  GET /coins
+    shows all coins
 
-### Step 4: Alerting!
-Since we don't want our Coin Machines to run low very often we will need to fill them up; in order to do this we will need to know when they are running low. Please set up a system for alerting all `Admin`s when the count of certain coin is low (> 4 in the system after a `Transaction`). Please keep the following in mind when sending alerts:
+- Coin#show  GET /coins/:id
+    shows coin of the given id
 
-check* Please send a single consistent email to all `Admin` emails, create an `Admin` resource to track this (single email means one email with all `Admin`s on it, not an individual email to each `Admin`)
-check* The email should contain the kind of `Coin`, the count, and the current value of all `Coin`s in the system
-* Bonus Points if you send the email asynchronously
+- Coin#create  POST /coins 
+    you will need to send params of coins[name] = "this" , coin[value] = this
+  creates a brand new coin for the system
+    #postman
+
+- Coin#destroy DELETE /coins/:id
+    removes coin from system 
+    #postman
+
+- Coin#update PATCH /coins/:id
+    updates a name/count/value of coin need to provided param as coin[name] and coin[value]
+    #postman
+
+- Coin#available GET /total
+    -gets the total balance of all coins in system in dollars
+
+
+
+
+### Step 2/3/4: Deposits/Withdrawals/Email
+
+    Transactions database
+
+- I implemented a database with the values 
+    coin_id - to include the coin that is part of the transaction
+    user_id - to connect the user whos coins they are
+    transaction_type - track if its a withdrawal or deposit
+    timestamps - to track when the transaction was made 
+
+    I also added a few validations/associations to the transaction model
+    
+ Transactions Controller 
+
+- #index  GET /transactions
+    shows all transactions
+
+- #create POST /transactions
+    pleaser enter following params in postman 
+    transaction[coin_id], transaction[user_id], transaction[transaction_type]
+    creates a new transaction object 
+
+- #show GET /transactions/:id
+    shows a transaction based on id given
+
+- #withdrawals GET /withdrawals
+    shows only withdrawal transactions
+
+- #deposits GET /deposits
+    shows all deposit transactions
+
+- #withdraw GET /withdraw/:coin_id    transaction[:coin_id] transaction[:user_id]
+    -subtracts from the count of a coin if balance is greater than zero 
+    -sends emails to all admin accounts if coins are less than 5 in count
+    - creates a new withdrawal transaction object and save it 
+    ####note_to_self transaction not saving because user technically doesnt exist 
+
+- #deposit GET /deposit/:coin_id   transaction[:coin_id] transaction[:user_id]
+    - same as above except no emails and for adding more to the coint of coins 
+    ####note_to_self transaction not saving because user technically doesnt exist 
+
+- #userTransactions GET /usertransactions/:user_id
+    -gets transactions by user
+
+- #transactionTime? Get /transactions/:id/time
+    -gives the time the transactions took place 
+
+
+!AUTHENTICATION!
+
+- I have also implemented my ownt authentication system which requires an email address and password.  Password is not stored by encrypted via BCRYPT and stored as a digest.  Access requires email login/password and an api key.  First step usually would be to create a user account.
+
+    Users Controller 
+        #create POST /users
+            params required:
+                user[:email] user[:password] user[:account_type] 
+                    note: key will be assigned to a new user automatically if not provided
+                    but for testing purposes please enter 'admin' as the user[:account_type]
+                    creates new account send api_key
+    
+    Sessions Controller
+        #create POST /signin 
+            params required:
+                session[:email] session[:password] session[:api_key]
+            a new session that does verification of email, password, and api key that was sent in the email.
+        #destroy
+            signs user out but since this a json api might not be able to do it
+        
+        For the purpose of seeing the functionality please use postman.  This api is also uploaded to heroku.  I have commented out my "before_action authenticate" option on my controllers as without a front end it will be hard to test the other functionality.  So at the moment you can view it without any authentication.  I have also seeded the database with test coins and transactions which you can view by following the functionality above.  Below I will provie a basic suggestion for you on how to test functionality.  
+
+        1.  Get your api_key by through postman to see if that functionality works by going to POST '/users'  please provide params as such params[:email] , params[password], params[account_type] you can set account type to admin or leave it be if you'd like
+
+        2.check sign in functionality by going to POST '/signin'  (POSTMAN! :)
+            Please provide params as such, params[:email], params[:password], paramas[:api_key]
+
+        3. after this feel free to go ahead and check out the rest of the functionality as stated in the controllers.  Something do depend on being logged in like the user_id in transactions might be null which will cause the transaction not to save.  This is the reason I have included test items in the database.  Thanks!  You can use the link: https://coinapp1.herokuapp.com/ 
+
+        Lastly, thank you for taking the time to read this and looking at my work!  If you have any questions please feel free to email me at syedm199343@gmail.com.  
+
+
+
+
 
 ## Submission
 When you are ready to submit this challenge, please email elliott@mortgagehippo.com with the following included:

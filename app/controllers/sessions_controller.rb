@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
                 render json:{status: :ok, params: session_params, msg: "Thanks #{email}, you're in!"}
         else
             #did not login 
-             render json: :error
+             render json: {status: :bad_request, msg: "unable to login", user: @user}
         end
         
     end
