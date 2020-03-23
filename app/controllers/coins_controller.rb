@@ -6,7 +6,7 @@ class CoinsController < ApplicationController
     def index 
         @coins = Coin.all
           #shows all coins 
-        render json: {name: @coins, status: :ok}
+        render json: {coins: @coins, status: :ok}
         
     end
 
