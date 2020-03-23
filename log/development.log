@@ -68074,3 +68074,535 @@ Processing by SessionsController#create as */*
 Completed 200 OK in 396ms (Views: 0.7ms | ActiveRecord: 22.7ms)
 
 
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (304.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "coinApp_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (220.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "coinApp_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (686.1ms)[0m  [1m[35mCREATE DATABASE "coinApp_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (442.2ms)[0m  [1m[35mCREATE DATABASE "coinApp_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7125404794998429450)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateCoins (20200320015514)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (47.9ms)[0m  [1m[35mCREATE TABLE "coins" ("id" bigserial primary key, "name" character varying NOT NULL, "value" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200320015514_create_coins.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200320015514"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeCoins (20200320023651)
+  [1m[35m (40.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "created_at" TYPE timestamp, ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200320023651_change_coins.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "updated_at" TYPE timestamp, ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200320023651_change_coins.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200320023651"]]
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTransaction (20200321025610)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (45.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "coin_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200321025610_create_transaction.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321025610"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumntoCoins (20200321032331)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "coins" ADD "count" integer[0m
+  ↳ db/migrate/20200321032331_add_columnto_coins.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321032331"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeCountDefault (20200321034447)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "count" SET DEFAULT 1[0m
+  ↳ db/migrate/20200321034447_change_count_default.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321034447"]]
+  ↳ bin/rails:9
+  [1m[35m (40.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20200321053102)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (46.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "api_key" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200321053102_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321053102"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumnToTransactionsTable (20200321053256)
+  [1m[35m (39.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD "user_id" integer[0m
+  ↳ db/migrate/20200321053256_add_column_to_transactions_table.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321053256"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddNulltotransactions (20200321054544)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:4
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "user_id" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:7
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321054544"]]
+  ↳ bin/rails:9
+  [1m[35m (42.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddNull (20200321055501)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "user_id" SET NOT NULL[0m
+  ↳ db/migrate/20200321055501_add_null.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321055501"]]
+  ↳ bin/rails:9
+  [1m[35m (40.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumnToTransactions (20200321072406)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (39.4ms)[0m  [1m[35mALTER TABLE "transactions" ADD "type" character varying NOT NULL[0m
+  ↳ db/migrate/20200321072406_add_column_to_transactions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321072406"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeDefualtCount (20200321073001)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "count" SET DEFAULT 0[0m
+  ↳ db/migrate/20200321073001_change_defualt_count.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (2.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321073001"]]
+  ↳ bin/rails:9
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to Changesusers (20200322054350)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  ↳ db/migrate/20200322054350_changesusers.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
+  ↳ db/migrate/20200322054350_changesusers.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200322054350"]]
+  ↳ bin/rails:9
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to UsersAddNull (20200322054947)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "password_digest" DROP NOT NULL[0m
+  ↳ db/migrate/20200322054947_users_add_null.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "email" DROP NOT NULL[0m
+  ↳ db/migrate/20200322054947_users_add_null.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200322054947"]]
+  ↳ bin/rails:9
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeTransactionscolumn (20200323003331)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" RENAME COLUMN "type" TO "transaction_type"[0m
+  ↳ db/migrate/20200323003331_change_transactionscolumn.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323003331"]]
+  ↳ bin/rails:9
+  [1m[35m (41.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to Usersaddcolumn (20200323011838)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "account_type" character varying[0m
+  ↳ db/migrate/20200323011838_usersaddcolumn.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323011838"]]
+  ↳ bin/rails:9
+  [1m[35m (20.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-23 22:53:57.166892"], ["updated_at", "2020-03-23 22:53:57.166892"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7125404794998429450)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCoin Create (1.1ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "penny"], ["value", 1], ["created_at", "2020-03-23 22:54:04.462433"], ["updated_at", "2020-03-23 22:54:04.462433"], ["count", 5]]
+  ↳ db/seeds.rb:11
+  [1m[35m (39.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mCoin Create (0.4ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "nickel"], ["value", 5], ["created_at", "2020-03-23 22:54:04.505265"], ["updated_at", "2020-03-23 22:54:04.505265"], ["count", 5]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mCoin Create (0.4ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dime"], ["value", 10], ["created_at", "2020-03-23 22:54:04.507743"], ["updated_at", "2020-03-23 22:54:04.507743"], ["count", 5]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mCoin Create (0.4ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "quarter"], ["value", 25], ["created_at", "2020-03-23 22:54:04.509968"], ["updated_at", "2020-03-23 22:54:04.509968"], ["count", 5]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."api_key" = $1 LIMIT $2[0m  [["api_key", "VuVGlpQh7AUmSevj+V+QZA=="], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("api_key", "created_at", "updated_at", "email", "password_digest", "account_type") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["api_key", "VuVGlpQh7AUmSevj+V+QZA=="], ["created_at", "2020-03-23 22:54:04.819403"], ["updated_at", "2020-03-23 22:54:04.819403"], ["email", "syedm199343@gmail.com"], ["password_digest", "$2a$12$Zr4EyY3jro38FRX/XLQmC.07WtObw1Xbi7SWu.hKvhuOieF/G0.4S"], ["account_type", "admin"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."api_key" = $1 LIMIT $2[0m  [["api_key", "Sh0LxPj8rxb2/3KjegBviA=="], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("api_key", "created_at", "updated_at", "email", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["api_key", "Sh0LxPj8rxb2/3KjegBviA=="], ["created_at", "2020-03-23 22:54:05.114029"], ["updated_at", "2020-03-23 22:54:05.114029"], ["email", "syed199343@gmail.com"], ["password_digest", "$2a$12$x6f5biFkwmkTOuBPGf9w/umaBPgNKfhAzljA69vNbSeikKnFzcove"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+Started GET "/" for ::1 at 2020-03-23 17:54:22 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/syedmohiuddin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.4.2/lib/active_record/log_subscriber.rb:98
+Processing by CoinsController#index as HTML
+  [1m[36mCoin Load (1.1ms)[0m  [1m[34mSELECT "coins".* FROM "coins"[0m
+  ↳ app/controllers/coins_controller.rb:9
+Completed 200 OK in 42ms (Views: 25.3ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/users" for ::1 at 2020-03-23 17:54:27 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (5.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 55ms (Views: 25.2ms | ActiveRecord: 27.1ms)
+
+
+Started GET "/transactions" for ::1 at 2020-03-23 17:54:31 -0500
+Processing by TransactionsController#index as HTML
+  [1m[36mTransaction Load (14.9ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  ↳ app/controllers/transactions_controller.rb:7
+Completed 200 OK in 53ms (Views: 2.4ms | ActiveRecord: 41.3ms)
+
+
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (218.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "coinApp_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (192.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "coinApp_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (403.4ms)[0m  [1m[35mCREATE DATABASE "coinApp_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (404.0ms)[0m  [1m[35mCREATE DATABASE "coinApp_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7125404794998429450)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateCoins (20200320015514)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (47.4ms)[0m  [1m[35mCREATE TABLE "coins" ("id" bigserial primary key, "name" character varying NOT NULL, "value" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200320015514_create_coins.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200320015514"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeCoins (20200320023651)
+  [1m[35m (40.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "created_at" TYPE timestamp, ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200320023651_change_coins.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "updated_at" TYPE timestamp, ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200320023651_change_coins.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200320023651"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTransaction (20200321025610)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "coin_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200321025610_create_transaction.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321025610"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumntoCoins (20200321032331)
+  [1m[35m (40.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "coins" ADD "count" integer[0m
+  ↳ db/migrate/20200321032331_add_columnto_coins.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321032331"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeCountDefault (20200321034447)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "count" SET DEFAULT 1[0m
+  ↳ db/migrate/20200321034447_change_count_default.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321034447"]]
+  ↳ bin/rails:9
+  [1m[35m (40.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20200321053102)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (46.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "api_key" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200321053102_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321053102"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumnToTransactionsTable (20200321053256)
+  [1m[35m (39.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "transactions" ADD "user_id" integer[0m
+  ↳ db/migrate/20200321053256_add_column_to_transactions_table.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321053256"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddNulltotransactions (20200321054544)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:4
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "created_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "updated_at" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:6
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "user_id" DROP NOT NULL[0m
+  ↳ db/migrate/20200321054544_add_nulltotransactions.rb:7
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321054544"]]
+  ↳ bin/rails:9
+  [1m[35m (40.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddNull (20200321055501)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "user_id" SET NOT NULL[0m
+  ↳ db/migrate/20200321055501_add_null.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321055501"]]
+  ↳ bin/rails:9
+  [1m[35m (40.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddColumnToTransactions (20200321072406)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (25.5ms)[0m  [1m[35mALTER TABLE "transactions" ADD "type" character varying NOT NULL[0m
+  ↳ db/migrate/20200321072406_add_column_to_transactions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321072406"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeDefualtCount (20200321073001)
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "coins" ALTER COLUMN "count" SET DEFAULT 0[0m
+  ↳ db/migrate/20200321073001_change_defualt_count.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200321073001"]]
+  ↳ bin/rails:9
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to Changesusers (20200322054350)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  ↳ db/migrate/20200322054350_changesusers.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
+  ↳ db/migrate/20200322054350_changesusers.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200322054350"]]
+  ↳ bin/rails:9
+  [1m[35m (20.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to UsersAddNull (20200322054947)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "password_digest" DROP NOT NULL[0m
+  ↳ db/migrate/20200322054947_users_add_null.rb:3
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "email" DROP NOT NULL[0m
+  ↳ db/migrate/20200322054947_users_add_null.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200322054947"]]
+  ↳ bin/rails:9
+  [1m[35m (19.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeTransactionscolumn (20200323003331)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "transactions" RENAME COLUMN "type" TO "transaction_type"[0m
+  ↳ db/migrate/20200323003331_change_transactionscolumn.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323003331"]]
+  ↳ bin/rails:9
+  [1m[35m (13.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to Usersaddcolumn (20200323011838)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "users" ADD "account_type" character varying[0m
+  ↳ db/migrate/20200323011838_usersaddcolumn.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323011838"]]
+  ↳ bin/rails:9
+  [1m[35m (21.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-23 22:55:19.306666"], ["updated_at", "2020-03-23 22:55:19.306666"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7125404794998429450)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCoin Create (1.2ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "penny"], ["value", 1], ["created_at", "2020-03-23 22:55:26.771108"], ["updated_at", "2020-03-23 22:55:26.771108"], ["count", 5]]
+  ↳ db/seeds.rb:11
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mCoin Create (0.4ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "nickel"], ["value", 5], ["created_at", "2020-03-23 22:55:26.776601"], ["updated_at", "2020-03-23 22:55:26.776601"], ["count", 5]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mCoin Create (0.3ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dime"], ["value", 10], ["created_at", "2020-03-23 22:55:26.778779"], ["updated_at", "2020-03-23 22:55:26.778779"], ["count", 5]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mCoin Create (0.4ms)[0m  [1m[32mINSERT INTO "coins" ("name", "value", "created_at", "updated_at", "count") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "quarter"], ["value", 25], ["created_at", "2020-03-23 22:55:26.780823"], ["updated_at", "2020-03-23 22:55:26.780823"], ["count", 5]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."api_key" = $1 LIMIT $2[0m  [["api_key", "ieJjnmvrm6yDrx0xR5lmoA=="], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("api_key", "created_at", "updated_at", "email", "password_digest", "account_type") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["api_key", "ieJjnmvrm6yDrx0xR5lmoA=="], ["created_at", "2020-03-23 22:55:27.121356"], ["updated_at", "2020-03-23 22:55:27.121356"], ["email", "syedm199343@gmail.com"], ["password_digest", "$2a$12$ZNuCu7XuLfKQLRZyeFnBYu6LRrIIuox4xyn0s08IwIF8pn0iY2npe"], ["account_type", "admin"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."api_key" = $1 LIMIT $2[0m  [["api_key", "3jvKCCTk1GaXUljZ9of/4w=="], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("api_key", "created_at", "updated_at", "email", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["api_key", "3jvKCCTk1GaXUljZ9of/4w=="], ["created_at", "2020-03-23 22:55:27.428872"], ["updated_at", "2020-03-23 22:55:27.428872"], ["email", "syed199343@gmail.com"], ["password_digest", "$2a$12$tYRH0sVbnZ0m5HxPAl7R6uFGxRM.hwlvimVjIpEnu7TVGK4Zpr1Qy"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mTransaction Create (0.9ms)[0m  [1m[32mINSERT INTO "transactions" ("coin_id", "created_at", "updated_at", "user_id", "transaction_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["coin_id", 1], ["created_at", "2020-03-23 22:55:27.467892"], ["updated_at", "2020-03-23 22:55:27.467892"], ["user_id", 1], ["transaction_type", "deposit"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("coin_id", "created_at", "updated_at", "user_id", "transaction_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["coin_id", 2], ["created_at", "2020-03-23 22:55:27.511721"], ["updated_at", "2020-03-23 22:55:27.511721"], ["user_id", 1], ["transaction_type", "withdrawal"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("coin_id", "created_at", "updated_at", "user_id", "transaction_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["coin_id", 3], ["created_at", "2020-03-23 22:55:27.516173"], ["updated_at", "2020-03-23 22:55:27.516173"], ["user_id", 2], ["transaction_type", "withdrawal"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+Started GET "/" for ::1 at 2020-03-23 17:55:43 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/syedmohiuddin/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.4.2/lib/active_record/log_subscriber.rb:98
+Processing by CoinsController#index as HTML
+  [1m[36mCoin Load (1.4ms)[0m  [1m[34mSELECT "coins".* FROM "coins"[0m
+  ↳ app/controllers/coins_controller.rb:9
+Completed 200 OK in 49ms (Views: 17.8ms | ActiveRecord: 25.0ms)
+
+
+Started GET "/users" for ::1 at 2020-03-23 17:55:47 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6
+Completed 200 OK in 58ms (Views: 18.8ms | ActiveRecord: 35.8ms)
+
+
+Started GET "/transactions" for ::1 at 2020-03-23 17:56:07 -0500
+Processing by TransactionsController#index as HTML
+  [1m[36mTransaction Load (9.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  ↳ app/controllers/transactions_controller.rb:7
+Completed 200 OK in 50ms (Views: 15.7ms | ActiveRecord: 25.4ms)
+
+

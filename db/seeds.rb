@@ -18,6 +18,6 @@ admin = User.create(email: 'syedm199343@gmail.com', password: 'password', accoun
 user =  User.create(email: 'syed199343@gmail.com', password: 'password_2')
 
 #transactions
-transaction = Transaction.new(coin_id: 1, user_id: 1, transaction_type: "deposit")
-transaction_2 = Transaction.new(coin_id: 2, user_id: 1, transaction_type: "withdrawal")
-transaction_3 = Transaction.new(coin_id: 3, user_id: 2, transaction_type: "withdrawal")
+transaction_1 = Transaction.create(coin_id: 1, user_id: 1, transaction_type: "deposit")
+transaction_2 = Transaction.create(coin_id: 2, user_id: 1, transaction_type: "withdrawal")
+transaction_3 = Transaction.create(coin_id: 3, user_id: 2, transaction_type: "withdrawal")
