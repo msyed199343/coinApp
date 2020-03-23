@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
    
+
+    def index
+        @users= User.all
+        render json: {users: @users, status: :ok}
+    end
     def create
         @user = User.new(user_params) #create new user with params 
         

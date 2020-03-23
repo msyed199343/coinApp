@@ -13,7 +13,7 @@
 
 class User < ApplicationRecord
     validates :api_key, null: false, uniqueness: true
-    has_many :transactions
+    # has_many :transactions
     validates :password, length: {minimum: 7}
 
     after_initialize :ensure_key
