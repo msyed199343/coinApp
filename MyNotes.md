@@ -1,0 +1,93 @@
+Step 1 : coins
+
+
+* Create a Coins table with a value, name, and timestamps of some sort 
+    * Make sure null: false 
+* Create a model based for coins 
+    
+    Coin possible model methods
+        Coin:coin_sum
+            sum = all coins in databas (value) 
+            then we return sum 
+
+
+    **Not needed methods in model  removed from rough draft notes 
+        #initialize(name, value)
+            takes in name and value as params
+
+        Coin:coin=(name, value) (dont need rails generated)
+            updates self so self.value = value && self.name = name 
+        # remove_coin
+            removes self form database (self.destroy) by USING #DELETE IN CONTROLLER (NOT NEEDED )
+        #all_coins 
+            shows all coins in db (coin.all) // USING #INDEX IN CONTROLLER (NOT NEEDED) 
+        #single_coin(id)
+             show a single coin by the id (coin.find(id))) USING #SHOW IN CONTROLLER (NOT NEEDED) 
+        
+
+* Create CoinsConstroller
+    #index
+        return all coins 
+            (@coins = Coin.all 
+                render json: @coins
+        )
+    #show 
+     return 1 coin
+       ( @coin = Coin.find_by(name: params[:name])
+
+    #create 
+    ! COINS SHOULD EXIST IN DATABSE COUNT CAN BE 0 !
+        @coin = Coin.new(params[:name], params[:value])
+        @coin ? render json @coin : use a flash message to notify render :new (if we werent using json and using html views)
+    
+    #destroy
+        ! NEEDS A BEFORE ACTION CLAUSE !
+        @coin = Coin.find(params[:name]) (no html but making back end of api as if HTML exists even though we are only using json)
+            render ==> (show sum and to show total is decresed because of "withdrawl" of coin )
+    
+STEP 2 : transactions
+* ! BEFORE ACTION CLAUSE !
+* create transactions table with 
+   - coins_id (to see which type of coin)
+   - timestamps (specificaly to see when transaction happned 
+   - user_id  (connecting to the users api_key through this column)
+
+* Transaction model
+    -association/validations 
+        - a transaction belongs to a specific user(api_key/user_id)
+        -validate coin_id and user_id make sure not === null
+* Transactions controller
+    - Get#index
+        - get all transactions
+    - Post#create
+        - create a new transaction and deposit coin (deposit by increasing count fo that certain coin)
+    - Get#show
+        - take params users api_token and show all transactions with that user
+    
+
+STEP 3 WITHDRAWLS
+   * -  NEED TO ADD A "TYPE" column TO TRANSACTIONs ABLE to distinguish    if  it's a withdrawl or deposit!
+   - fix transactions models to reflect above change
+    -next need to add withdrawl capabilities through transactions contorller
+    - Transactions controller
+        #Withdraw
+            -one coin at a time
+            -user needs to specify which coin(if front end existed)
+                -quarter, nickel, dime, penny
+            -the amount specified gets removed from the available count
+            of that COIN
+            - if coin is already 0 THROW ERROR!
+
+
+
+
+
+ 
+
+
+
+
+    
+    
+
+            
