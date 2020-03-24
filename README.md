@@ -123,16 +123,13 @@ Coins controller
         
  For the purpose of seeing the functionality please use postman.  This api is also uploaded to heroku.  I have commented out my "before_action authenticate" option on my controllers for testing purposes.  At the moment you can view it without any authentication.  I have also seeded the database with test coins and transactions which you can view by following the functionality above.  Below I will provie a basic suggestion for you on how to test functionality.  
 
-     - Get your api_key by through postman to see if that functionality works by going to POST '/users'  please provide params as such params[:email] , params[password], params[account_type] you can set account type to admin or leave it be if you'd like.  
+-Get your api_key by through postman to see if that functionality works by going to POST '/users'  please provide params as such params[:email] , params[password], params[account_type] you can set account type to admin or leave it be if you'd like.  
             
-     - check sign in functionality by going to POST '/signin'  (POSTMAN! :)
-        Please provide params as such, params[:email], params[:password], paramas[:api_key]
+-check sign in functionality by going to POST '/signin'  (POSTMAN! :)please provide params as such, params[:email], params[:password], paramas[:api_key]
 
-     - after this feel free to go ahead and check out the rest of the functionality as stated in the controllers notes.  A lot of functionality does depend on being logged in like the user_id in transactions might be null which will cause the transaction not to save. (solution is to provide a user id that is already in the database, like user[:id] = 1)  This is the reason I have included test items in the database.  Thanks!  You can use the link: https://coinapp1.herokuapp.com/ 
+-after this feel free to go ahead and check out the rest of the functionality as stated in the controllers notes.  A lot of functionality does depend on being logged in like the user_id in transactions might be null which will cause the transaction not to save. (solution is to provide a user id that is already in the database, like user[:id] = 1)  This is the reason I have included test items in the database.  Thanks!  You can use the link: https://coinapp1.herokuapp.com/ 
 
-        
-        
-        Lastly, thank you for taking the time to read this and looking at my work!  If you have any questions please feel free to email me at syedm199343@gmail.com.  
+-Lastly, thank you for taking the time to read this and looking at my work!  If you have any questions please feel free to email me at syedm199343@gmail.com.  
 
 
 
