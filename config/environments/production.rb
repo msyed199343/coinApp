@@ -54,20 +54,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "coinApp_#{Rails.env}"
 
-  config.action_mailer.raise_delivery_errors = true
-  ActionMailer::Base.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
-  host = 'https://coinapp1.herokuapp.com/'
-  config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.gmail.com',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => xyz@gmail.com,
-    :password       => password,
-    :domain         => 'gmail.com',
-    :enable_starttls_auto => true
-  }
 
 
    ActionMailer::Base.perform_deliveries = true
