@@ -83,13 +83,13 @@ Coins controller
 - #deposits GET /deposits
     shows all deposit transactions
 
-- #withdraw GET /withdraw/:coin_id    transaction[:coin_id] transaction[:user_id]
+- #withdraw GET /withdraw/:coin_id    transaction[:user_id] example: /withdraw/4?transaction[user_id]=1
     -subtracts from the count of a coin if balance is greater than zero 
     -sends emails to all admin accounts if coins are less than 5 in count
     - creates a new withdrawal transaction object and save it 
     ####note_to_self transaction not saving because user technically doesnt exist 
 
-- #deposit GET /deposit/:coin_id   transaction[:coin_id] transaction[:user_id]
+- #deposit GET /deposit/:coin_id   transaction[:user_id] example: /deposit/1?transaction[user_id]=1
     - same as above except no emails and for adding more to the coint of coins 
     ####note_to_self transaction not saving because user technically doesnt exist 
 
@@ -122,12 +122,12 @@ Coins controller
         
         For the purpose of seeing the functionality please use postman.  This api is also uploaded to heroku.  I have commented out my "before_action authenticate" option on my controllers as without a front end it will be hard to test the other functionality.  So at the moment you can view it without any authentication.  I have also seeded the database with test coins and transactions which you can view by following the functionality above.  Below I will provie a basic suggestion for you on how to test functionality.  
 
-        1.  Get your api_key by through postman to see if that functionality works by going to POST '/users'  please provide params as such params[:email] , params[password], params[account_type] you can set account type to admin or leave it be if you'd like
+        - Get your api_key by through postman to see if that functionality works by going to POST '/users'  please provide params as such params[:email] , params[password], params[account_type] you can set account type to admin or leave it be if you'd like
 
-        2.check sign in functionality by going to POST '/signin'  (POSTMAN! :)
+        - check sign in functionality by going to POST '/signin'  (POSTMAN! :)
             Please provide params as such, params[:email], params[:password], paramas[:api_key]
 
-        3. after this feel free to go ahead and check out the rest of the functionality as stated in the controllers.  Something do depend on being logged in like the user_id in transactions might be null which will cause the transaction not to save.  This is the reason I have included test items in the database.  Thanks!  You can use the link: https://coinapp1.herokuapp.com/ 
+        - after this feel free to go ahead and check out the rest of the functionality as stated in the controllers.  Something do depend on being logged in like the user_id in transactions might be null which will cause the transaction not to save.  This is the reason I have included test items in the database.  Thanks!  You can use the link: https://coinapp1.herokuapp.com/ 
 
         Lastly, thank you for taking the time to read this and looking at my work!  If you have any questions please feel free to email me at syedm199343@gmail.com.  
 
@@ -135,12 +135,7 @@ Coins controller
 
 
 
-## Submission
-When you are ready to submit this challenge, please email elliott@mortgagehippo.com with the following included:
 
-* The URL of the deployed site
-* The URL of the GitHub Repo
-* Any additional notes you'd like to include
 
 
 

@@ -36,17 +36,18 @@ class TransactionsController < ApplicationController
      def withdraw
         #subtract coin from count 
         @coin = Coin.find_by(id: params[:coin_id])
-            
-            
+        @user = User.find_by(id: params[:transaction][:user_id])
+           
         if @coin.count > 0
             @coin.minusCoin 
 
             # if count is getting lower than 5 send admins email!
             mail_admins = UserMailer.coinsLow(@coin).deliver if @coin.count < 5 
 
+            
             #track transaction by initiating new Transaction instance
-            @transaction = Transaction.new(coin_id: params[:coin_id], user_id: params[:user_id], transaction_type: 'Withdrawal')
-
+            @transaction = Transaction.new(user_id: @user.id, coin_id: @coin.id, transaction_type: "withdrawal")
+            
             #save it
             @transaction.save 
 
@@ -71,16 +72,18 @@ class TransactionsController < ApplicationController
         #find a coin by its id
 
         @coin = Coin.find_by(id: params[:coin_id])
+        @user = User.find_by(id: params[:transaction][:user_id])
+
         @coin.refillCoin #call refillCoin to +1 the save will happen in refillCoin
 
          #track transaction by initiating new Transaction instance
          
-            @transaction = Transaction.new(coin_id: params[:coin_id], user_id: params[:user_id], transaction_type: 'Deposit')
+            @transaction = Transaction.new(coin_id: @coin.id, user_id: @user.id, transaction_type: 'deposit')
 
             #save it
             @transaction.save 
 
-        render json: {coin: @coin, status: :ok, msg: 'Coin Updated!'}
+        render json: {coin: @coin, status: :ok, msg: 'Thank you for your deposit!'}
     end
 
     def userTransactions
