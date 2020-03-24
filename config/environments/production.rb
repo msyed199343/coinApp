@@ -72,7 +72,7 @@ Rails.application.configure do
 
    ActionMailer::Base.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  host = 'https://coinapp1.herokuapp.com/'
+  host = 'https://coinapp1.herokuapp.com'
   config.action_mailer.default_url_options = { :host => host, protocol: 'https' }
 
   config.action_mailer.smtp_settings = {
