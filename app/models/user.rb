@@ -12,8 +12,8 @@
 #
 
 class User < ApplicationRecord
-    validates :api_key, null: false, uniqueness: true
-    # has_many :transactions
+    validates :api_key, :email, :password_digest, null: false, uniqueness: true
+    has_many :transactions
     validates :password, length: {minimum: 7}
 
     after_initialize :ensure_key
@@ -45,7 +45,7 @@ class User < ApplicationRecord
     end
 
     def reset_api_key!
-        #resets key if neede
+        #resets key if needed
         self.api_key = self.generate_api_key
     end
 
