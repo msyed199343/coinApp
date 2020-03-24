@@ -42,8 +42,8 @@ class TransactionsController < ApplicationController
             @coin.minusCoin 
 
             # if count is getting lower than 5 send admins email!
-            mail_admins = UserMailer.coinsLow(@coin).deliver if @coin.count < 5 
-
+            mail_admins = UserMailer.coinsLow(@coin).deliver_now if @coin.count < 5 
+            
             
             #track transaction by initiating new Transaction instance
             @transaction = Transaction.new(user_id: @user.id, coin_id: @coin.id, transaction_type: "withdrawal")

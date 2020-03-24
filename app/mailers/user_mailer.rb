@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-default from: 'no-reply@coinApp.com'
+default from: 'coinapp@gmail.com'
 
     def welcome_with_api_token!(user)
         @user = user
@@ -14,7 +14,7 @@ default from: 'no-reply@coinApp.com'
         #set @coin to coin 
         @coin = coin
         #sql below to grab all admins then send mail to all admins array
-        @admins = User.where(account_type: "Admin").pluck(:email)
+        @admins = User.where(account_type: "admin").pluck(:email)
 
      
             mail(

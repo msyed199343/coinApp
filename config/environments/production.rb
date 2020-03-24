@@ -54,7 +54,37 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "coinApp_#{Rails.env}"
 
-  config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
+  ActionMailer::Base.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://coinapp1.herokuapp.com/'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.gmail.com',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => xyz@gmail.com,
+    :password       => password,
+    :domain         => 'gmail.com',
+    :enable_starttls_auto => true
+  }
+
+
+   ActionMailer::Base.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'https://coinapp1.herokuapp.com/'
+  config.action_mailer.default_url_options = { :host => host, protocol: 'http' }
+
+  config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            => 'coinapp199343@gmail.com',
+  :password             => 'Coinapp199343!',
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
+
+  
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
