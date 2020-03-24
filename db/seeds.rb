@@ -15,7 +15,7 @@ nickel = Coin.create(name: 'quarter', value: 25, count: 5)
 
 #users
 admin = User.create(email: 'syedm199343@gmail.com', password: 'password', account_type: 'admin')
-user =  User.create(email: 'syed199343@gmail.com', password: 'password_2')
+user =  User.create(email: 'random_user@gmail.com', password: 'password_2')
 admin_2 = User.create(email: 'syed199343@gmail.com', password: 'password_3', account_type: 'admin')
 
 #transactions
